@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/home/profi.css}" rel="stylesheet">
+    <title>User Profile</title>
+
+</head>
+<body>
+<div class="profile-container">
+    <div class="profile-header">
+        <div class="profile-picture">
+            <img src="" alt="Profile Picture">
+        </div>
+        <h1>John Doe</h1>
+    </div>
+
+    <div class="profile-info">
+        <div class="info-group">
+            <div class="info-label">First Name</div>
+            <div class="info-value">John</div>
+        </div>
+        <div class="info-group">
+            <div class="info-label">Last Name</div>
+            <div class="info-value">Doe</div>
+        </div>
+        <div class="info-group">
+            <div class="info-label">Email</div>
+            <div class="info-value">john.doe@example.com</div>
+        </div>
+        <div class="info-group">
+            <div class="info-label">Phone</div>
+            <div class="info-value">+1 234 567 8900</div>
+        </div>
+        <div class="info-group">
+            <div class="info-label">Date of Birth</div>
+            <div class="info-value">15 March 1985</div>
+        </div>
+        <div class="info-group">
+            <div class="info-label">Gender</div>
+            <div class="info-value">Male</div>
+        </div>
+        <div class="info-group">
+            <div class="info-label">Country</div>
+            <div class="info-value">United States</div>
+        </div>
+        <div class="info-group">
+            <div class="info-label">City</div>
+            <div class="info-value">New York</div>
+        </div>
+        <div class="info-group">
+            <div class="info-label">Postal Code</div>
+            <div class="info-value">10001</div>
+        </div>
+        <div class="info-group">
+            <div class="info-label">Member Since</div>
+            <div class="info-value">January 2024</div>
+        </div>
+    </div>
+
+    <div class="profile-actions">
+        <button class="action-button edit-profile">Edit Profile</button>
+        <button class="action-button view-bookings">View Bookings</button>
+    </div>
+</div>
+</body>
+</html>

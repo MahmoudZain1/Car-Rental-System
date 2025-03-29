@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+    <link rel="stylesheet" th:href="@{/Profile/Verify.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Email Verification</h1>
+    <p>Please enter the verification code sent to your email:</p>
+    <form id="Verify"  th:action="@{/Verify}">
+        <input type="text" placeholder="Enter verification code" required name="code">
+        <button type="submit">Verify</button>
+    </form>
+    <p class="note">Didn't receive the code? <a href="#">Resend the code</a></p>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" th:href="@{/Profile/Register.css}">
+    <link rel="icon" th:href="@{/icon.jpg}">
+</head>
+<body>
+<form th:action="@{/Register}" method="post" th:object="${user}">
+    <div class="wrapper">
+        <h1>Register</h1>
+
+        <div class="input-box">
+            <input type="text" placeholder="First Name" th:field="*{firstName}" required>
+            <i class='bx bxs-user'></i>
+            <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error"></div>
+        </div>
+
+        <div class="input-box">
+            <input type="text" placeholder="Last Name" th:field="*{lastName}" required>
+            <i class='bx bxs-user'></i>
+            <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error"></div>
+        </div>
+
+        <div class="input-box">
+            <input type="email" placeholder="Email" th:field="*{email}" required>
+            <i class='bx bxs-envelope'></i>
+            <div th:if="${emailError}" class="error" th:text="${emailError}"></div>
+        </div>
+
+
+        <div class="input-box">
+            <input type="password" placeholder="Password" th:field="*{password}" required minlength="8">
+            <i class='bx bxs-lock-alt'></i>
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></div>
+        </div>
+
+
+
+        <div class="remember-forgot">
+            <label><input type="checkbox" >Remember Me</label>
+        </div>
+
+        <button type="submit" class="btn">Register</button>
+
+        <div class="register-link">
+            <p>Do you have an account? <a th:href="@{/Login}">Sign in</a></p>
+        </div>
+
+        <div class="social-login">
+            <button type="button" id="googleSignIn" class="google-btn">Sign in with Google</button>
+            <button type="button" id="passkeySignIn" class="passkey-btn">Use Passkey</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Dashboard - CarRental</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/sidebars.css" rel="stylesheet">
+    <script src="/js/color-modes.js"></script>
+    <link rel="stylesheet" href="/css/Style.css">
+    <link rel="stylesheet" href="/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css">
+
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="circle-half" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+    </symbol>
+    <symbol id="sun-fill" viewBox="0 0 16 16">
+        <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+    </symbol>
+    <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+        <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+    </symbol>
+    <symbol id="check2" viewBox="0 0 16 16">
+        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+    </symbol>
+</svg>
+<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+    <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+            id="bd-theme"
+            type="button"
+            aria-expanded="false"
+            data-bs-toggle="dropdown"
+            aria-label="Toggle theme (auto)">
+        <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
+        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
+                <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+                Light
+                <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
+                <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
+                Dark
+                <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto">
+                <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#circle-half"></use></svg>
+                Auto
+                <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+            </button>
+        </li>
+    </ul>
+</div>
+
+<main class="d-flex flex-nowrap">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <i class="bi bi-car-front fs-3 me-2"></i>
+            <span class="fs-4">CarRental Admin</span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link active">
+                    <i class="bi bi-house-door sidebar-icon"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="/Analytics" class="nav-link text-white">
+                    <i class="bi bi-speedometer2 sidebar-icon"></i>
+                    Analytics
+                </a>
+            </li>
+            <li>
+                <a href="/Rentals" class="nav-link text-white">
+                    <i class="bi bi-calendar3 sidebar-icon"></i>
+                    Rentals
+                </a>
+            </li>
+            <li>
+                <a href="AddCars" class="nav-link text-white">
+                    <i class="bi bi-car-front sidebar-icon"></i>
+                    Cars
+                </a>
+            </li>
+            <li>
+                <a href="/AddUsers" class="nav-link text-white">
+                    <i class="bi bi-people sidebar-icon"></i>
+                    Customers
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-white">
+                    <i class="bi bi-gear sidebar-icon"></i>
+                    Settings
+                </a>
+            </li>
+        </ul>
+        <hr>
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="./Photo/photo.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong>Mahmoud Zain</strong>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-right me-2"></i>Sign out</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="b-example-divider b-example-vr"></div>
+
+    <div class="flex-grow-1">
+        <nav class="navbar navbar-expand-lg border-bottom">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold fs-4">Car<span class="text-primary">R</span>ental</a>
+                <div class="d-flex align-items-center">
+
+                    <form class="d-flex me-3">
+                        <input class="form-control" type="search" placeholder="Search...">
+                        <button class="btn btn-primary ms-2" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <div class="row mt-4 mx-3">
+            <div class="col-md-3">
+                <div class="card bg-primary text-white stats-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Users</h5>
+                        <h2 class="card-text" th:text="${totalUser}"></h2>
+                        <i class="bi bi-people float-end fs-1 opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-success text-white stats-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Active Rentals</h5>
+                        <h2 class="card-text">0</h2>
+                        <i class="bi bi-car-front float-end fs-1 opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-warning text-white stats-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Available Cars</h5>
+                        <h2 class="card-text">0</h2>
+                        <i class="bi bi-check-circle float-end fs-1 opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-info text-white stats-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Revenue</h5>
+                        <h2 class="card-text">$0.0</h2>
+                        <i class="bi bi-currency-dollar float-end fs-1 opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mx-3 mt-4">
+            <div class="card-body">
+                <form class="row g-3">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" placeholder="Search name...">
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select">
+                            <option selected>Filter by status...</option>
+                            <option>Active</option>
+                            <option>Inactive</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-search me-1"></i> Search
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="reset" class="btn btn-secondary w-100">
+                            <i class="bi bi-arrow-counterclockwise me-1"></i> Reset
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mx-3 mt-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Customers List</h5>
+                <div>
+                    <a href="/download-pdf" class="btn btn-outline-primary btn-sm me-2">
+                        <i class="bi bi-download me-1"></i> Export PDF
+                    </a>
+                    <a href="/AddUsers" class="btn btn-success btn-sm">
+                        <i class="bi bi-plus-lg me-1"></i> Add New Customer
+                    </a>
+                </div>
+            </div>
+            <div class="card-body mx-0">
+                <form th:action="@{/Users}" method="get" class="mb-4">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <input type="text"
+                                   name="searchName"
+                                   class="form-control"
+                                   placeholder="Search name..."
+                                   th:value="${searchName}">
+                        </div>
+                        <div class="col-md-3">
+                            <select name="status" class="form-control">
+                                <option value="">All Status</option>
+                                <option value="Active" th:selected="${status == 'Active'}">Active</option>
+                                <option value="Inactive" th:selected="${status == 'Inactive'}">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="date"
+                                   name="date"
+                                   class="form-control"
+                                   th:value="${date}">
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-search"></i> Search
+                            </button>
+                            <a th:href="@{/Users}" class="btn btn-secondary">
+                                <i class="bi bi-arrow-counterclockwise"></i> Reset
+                            </a>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Date of Birth</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="printUser : ${users}">
+                            <th scope="row" th:text="${printUser.id}"></th>
+                            <td th:text="${printUser.firstName}"></td>
+                            <td th:text="${printUser.lastName}"></td>
+                            <td th:text="${printUser.gender}"></td>
+                            <td th:text="${printUser.dateOfBirth}"></td>
+                            <td th:text="${printUser.email}"></td>
+                            <td th:text="${printUser.phone}"></td>
+                            <td><span class="badge bg-success">Active</span></td>
+                            <td>
+                                <div class="d-flex gap-1">
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <nav aria-label="Page navigation" class="mt-4">
+                    <ul class="pagination justify-content-end" th:if="${totalPages > 1}">
+                        <li class="page-item" th:classappend="${currentPage == 0} ? disabled">
+                            <a class="page-link"
+                               th:href="@{/Users(page=${currentPage - 1}, size=10,
+                             searchName=${searchName},
+                             status=${status},
+                             date=${date})}"
+                               tabindex="-1">Previous</a>
+                        </li>
+
+                        <li class="page-item"
+                            th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}"
+                            th:classappend="${pageNumber == currentPage} ? active">
+                            <a class="page-link"
+                               th:href="@{/Users(page=${pageNumber}, size=10,
+                             searchName=${searchName},
+                             status=${status},
+                             date=${date})}"
+                               th:text="${pageNumber + 1}"></a>
+                        </li>
+
+                        <li class="page-item"
+                            th:classappend="${currentPage == totalPages - 1} ? disabled">
+                            <a class="page-link"
+                               th:href="@{/Users(page=${currentPage + 1}, size=10,
+                             searchName=${searchName},
+                             status=${status},
+                             date=${date})}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="mt-2 text-muted">
+                    <small th:text="'Showing ' + ${users.size()} + ' of ' + ${totalUser} + ' entries'"></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center py-4">
+                <i class="bi bi-exclamation-triangle text-warning display-3"></i>
+                <h4 class="mt-3">Are you sure?</h4>
+                <p class="text-muted">You won't be able to revert this action!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger">Delete Customer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <i class="bi bi-check-circle-fill text-success me-2"></i>
+            <strong class="me-auto">Success</strong>
+            <small>Just now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body">
+            Action completed successfully!
+        </div>
+    </div>
+</div>
+
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/sidebars.js"></script>
+<div class="modal fade" id="userDetailsModal" tabindex="-1" aria-labelledby="userDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userDetailsModalLabel">details User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <div class="row mb-3">
+                            <div class="col-sm-4 fw-bold">fullName:</div>
+                            <div class="col-sm-8" id="fullName"></div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4 fw-bold">email:</div>
+                            <div class="col-sm-8" id="email"></div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4 fw-bold">phone:</div>
+                            <div class="col-sm-8" id="phone"></div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4 fw-bold">gender:</div>
+                            <div class="col-sm-8" id="gender"></div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4 fw-bold">dateOfBirth:</div>
+                            <div class="col-sm-8" id="dateOfBirth"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Coles</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const userDetailsModal = document.getElementById('userDetailsModal');
+    userDetailsModal.addEventListener('show.bs.modal', function(event) {
+        const button = event.relatedTarget;
+        const firstName = button.getAttribute('data-firstName');
+        const lastName = button.getAttribute('data-lastName');
+        const email = button.getAttribute('data-email');
+        const phone = button.getAttribute('data-phone');
+        const gender = button.getAttribute('data-gender');
+        const dateOfBirth = button.getAttribute('data-dateOfBirth');
+        document.getElementById('fullName').textContent = `${firstName} ${lastName}`;
+        document.getElementById('email').textContent = email;
+        document.getElementById('phone').textContent = phone;
+        document.getElementById('gender').textContent = gender;
+        document.getElementById('dateOfBirth').textContent = dateOfBirth;
+    });
+});
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
+    var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+    var toastList = toastElList.map(function (toastEl) {
+        return new bootstrap.Toast(toastEl)
+    })
+
+</script>
+
+</html>

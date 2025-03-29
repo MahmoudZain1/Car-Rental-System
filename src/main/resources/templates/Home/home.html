@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ar" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="موقع إيجار العربيات في مصر. اختر سيارتك المفضلة واستمتع برحلتك.">
+    <meta name="keywords" content="إيجار، عربيات، سيارات، مصر">
+    <title>Motor rental</title>
+    <link rel="icon" href="../static/photo/icon.jpg">
+    <link rel="stylesheet" th:href="@{/home/home.css}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&family=PT+Serif:ital@1&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet"></head>
+
+<body>
+
+<body>
+<div class="dd">
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo">Car Rental</a>
+            <ul class="navbar-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About us</a></li>
+                <li><a th:href="@{/Cars}">Cars</a></li>
+                <li><a th:href="@{/Book}" target="_blank">Book a car</a></li>
+                <li><a  th:href="@{/Profile}" target="_blank">Profile</a></li>
+                <li><a href="user-profile.html" class="nav-link" id="profileLink" style="display:none;">null</a></li>
+            </ul>
+            <div class="navbar-toggle">☰</div>
+        </div>
+    </nav>
+
+
+</div>
+<section class="promo-section">
+    <video class="video-background" autoplay loop muted playsinline>
+        <source th:src="@{/Video/car.mp4}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="overlay"></div>
+    <div class="content">
+        <h1 class="promo-text">20% OFF on Sports Car Rentals!</h1>
+        <a class="book-now" th:href="@{/Book}">Book Now</a>
+    </div>
+</section>
+<br><br><br><br><br>
+<section class="services-section">
+    <div class="section-header">
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-subtitle">Explore Our Range of Rental Cars to Suit Every Need</p>
+    </div>
+    <div class="services-grid">
+        <div class="service-card">
+            <img src="/photo/hyundai-motor.jpg" alt="Luxury Car" class="service-image">
+            <div class="service-content">
+                <h3 class="service-title">Luxury Cars</h3>
+                <p class="service-description">Experience ultimate comfort and style with our premium luxury vehicles.</p>
+                <a href="#" class="service-button">Learn More</a>
+            </div>
+        </div>
+        <div class="service-card">
+            <img src="/photo/hyundai-motor.jpg" alt="Economy Car" class="service-image">
+            <div class="service-content">
+                <h3 class="service-title">Economy Cars</h3>
+                <p class="service-description">Affordable and efficient options for budget-conscious travelers.</p>
+                <a href="#" class="service-button">Learn More</a>
+            </div>
+        </div>
+        <div class="service-card">
+            <img src="/photo/hyundai-motor.jpg" alt="SUV" class="service-image">
+            <div class="service-content">
+                <h3 class="service-title">SUVs</h3>
+                <p class="service-description">Spacious and versatile vehicles perfect for family trips and adventures.</p>
+                <a href="#" class="service-button">Learn More</a>
+            </div>
+        </div>
+        <div class="service-card">
+            <img src="/photo/hyundai-motor.jpg" alt="Sports Car" class="service-image">
+            <div class="service-content">
+                <h3 class="service-title">Sports Cars</h3>
+                <p class="service-description">High-performance cars for thrill-seekers and automotive enthusiasts.</p>
+                <a href="#" class="service-button">Learn More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="partners-section">
+    <h2>Our Partners</h2>
+    <h3>Trusted Collaborations</h3>
+    <div class="partners-grid">
+        <div class="partner-card">
+            <img src="/api/placeholder/150/80" alt="AutoTech Solutions" class="partner-logo">
+            <h4 class="partner-name">AutoTech Solutions</h4>
+            <p class="partner-description">Advanced vehicle technology</p>
+        </div>
+        <div class="partner-card">
+            <img src="/api/placeholder/150/80" alt="EcoFuel Innovations" class="partner-logo">
+            <h4 class="partner-name">EcoFuel Innovations</h4>
+            <p class="partner-description">Sustainable fuel solutions</p>
+        </div>
+        <div class="partner-card">
+            <img src="/api/placeholder/150/80" alt="SafeDrive Insurance" class="partner-logo">
+            <h4 class="partner-name">SafeDrive Insurance</h4>
+            <p class="partner-description">Comprehensive vehicle insurance</p>
+        </div>
+        <div class="partner-card">
+            <img src="/api/placeholder/150/80" alt="LuxeInteriors Co." class="partner-logo">
+            <h4 class="partner-name">LuxeInteriors Co.</h4>
+            <p class="partner-description">Premium vehicle interiors</p>
+        </div>
+        <div class="partner-card">
+            <img src="/api/placeholder/150/80" alt="GlobalNav Systems" class="partner-logo">
+            <h4 class="partner-name">GlobalNav Systems</h4>
+            <p class="partner-description">State-of-the-art navigation</p>
+        </div>
+        <div class="partner-card">
+            <img src="/api/placeholder/150/80" alt="RoadAssist 24/7" class="partner-logo">
+            <h4 class="partner-name">RoadAssist 24/7</h4>
+            <p class="partner-description">Round-the-clock roadside assistance</p>
+        </div>
+        <div class="partner-card">
+            <img src="/api/placeholder/150/80" alt="RoadAssist 24/7" class="partner-logo">
+            <h4 class="partner-name">RoadAssist 24/7</h4>
+            <p class="partner-description">Round-the-clock roadside assistance</p>
+        </div>
+        <div class="partner-card">
+            <img src="/api/placeholder/150/80" alt="RoadAssist 24/7" class="partner-logo">
+            <h4 class="partner-name">RoadAssist 24/7</h4>
+            <p class="partner-description">Round-the-clock roadside assistance</p>
+        </div>
+        <div class="partner-card">
+            <img src="/api/placeholder/150/80" alt="RoadAssist 24/7" class="partner-logo">
+            <h4 class="partner-name">RoadAssist 24/7</h4>
+            <p class="partner-description">Round-the-clock roadside assistance</p>
+        </div>
+        <div class="partner-card">
+            <img src="/api/placeholder/150/80" alt="RoadAssist 24/7" class="partner-logo">
+            <h4 class="partner-name">RoadAssist 24/7</h4>
+            <p class="partner-description">Round-the-clock roadside assistance</p>
+        </div>
+    </div>
+    <div class="cta-section">
+        <a href="#" class="cta-button">Explore Partnership Opportunities</a>
+    </div>
+</section>
+<section class="customer-reviews">
+    <h2>What Our Customers Are Saying</h2>
+    <h3>Real Feedback from Our Valued Clients</h3>
+    <div class="reviews-grid">
+        <div class="review-card">
+            <img src="../static/photo/person.jpeg" alt="John Doe" class="customer-photo">
+            <h4 class="customer-name">John Doe</h4>
+            <div class="star-rating">★★★★★</div>
+            <p class="review-text">"Exceptional service! The car was in perfect condition, and the staff was incredibly helpful. Will definitely rent from them again!"</p>
+        </div>
+        <div class="review-card">
+            <img src="../static/photo/person.jpeg" alt="Jane Smith" class="customer-photo">
+            <h4 class="customer-name">Jane Smith</h4>
+            <div class="star-rating">★★★★☆</div>
+            <p class="review-text">"Great experience overall. The pickup and drop-off process was smooth, and the car was exactly what I needed for my trip."</p>
+        </div>
+        <div class="review-card">
+            <img src="../static/photo/person.jpeg" alt="Mike Johnson" class="customer-photo">
+            <h4 class="customer-name">Mike Johnson</h4>
+            <div class="star-rating">★★★★★</div>
+            <p class="review-text">"Top-notch customer service! They went above and beyond to ensure I had the perfect car for my family vacation. Highly recommended!"</p>
+        </div>
+    </div>
+    <div class="cta-section">
+        <a href="#" class="cta-button">Share Your Experience</a>
+    </div>
+</section>
+<section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <h3>Get Answers to Your Queries</h3>
+
+    <div class="search-container">
+        <input type="text" class="search-bar" placeholder="Search for questions...">
+    </div>
+
+    <div class="faq-list">
+        <div class="faq-item">
+            <div class="faq-question">How do I make a reservation?</div>
+            <div class="faq-answer">To make a reservation, simply visit our website and use the booking form on the homepage. Select your pickup and drop-off locations, dates, and desired vehicle type. Follow the prompts to complete your booking.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">What payment methods do you accept?</div>
+            <div class="faq-answer">We accept all major credit cards (Visa, MasterCard, American Express) and debit cards. Some locations may also accept cash or digital payment methods. Please check with your specific rental location for details.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Can I modify or cancel my reservation?</div>
+            <div class="faq-answer">Yes, you can modify or cancel your reservation through our website or by contacting our customer service team. Please note that cancellation fees may apply depending on how close to the pickup time you make changes.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">What documents do I need to rent a car?</div>
+            <div class="faq-answer">You will need a valid driver's license, a credit card in the renter's name, and proof of insurance. International renters may need to provide a passport and an international driver's permit.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Is there an age requirement for renting a car?</div>
+            <div class="faq-answer">The minimum age to rent a car is typically 21 years old. However, drivers under 25 may be subject to a young driver surcharge. Some specialty or luxury vehicles may have higher age requirements.</div>
+        </div>
+    </div>
+
+    <div class="cta-section">
+        <a href="#" class="cta-button">Contact Support for More Help</a>
+    </div>
+</section>
+
+<script>
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling;
+            const isOpen = answer.style.display === 'block';
+
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                item.style.display = 'none';
+            });
+            document.querySelectorAll('.faq-question').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            answer.style.display = isOpen ? 'none' : 'block';
+            question.classList.toggle('active', !isOpen);
+        });
+    });
+
+    const searchBar = document.querySelector('.search-bar');
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    searchBar.addEventListener('input', (e) => {
+        const searchString = e.target.value.toLowerCase();
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question').textContent.toLowerCase();
+            const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+
+            if (question.includes(searchString) || answer.includes(searchString)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+</script>
+<div class="section">
+
+    <!-- <h1>Our Available Car</h1> -->
+</div>
+<br><br>
+<!-- <div class="filter-container">
+    <label for="carType" class="ssss">Type of car</label>
+    <select id="carType">
+        <option value="all">all</option>
+        <option value="BMW">BMW </option>
+        <option value="Mercedes">Mercedes </option>
+        <option value="Audi">Audi </option>
+        <option value="Hyundai">Hyundai </option>
+        <option value="Toyota">Toyota </option>
+        <option value="Citroen">Citroen </option>
+        <option value="Lancer">Lancer </option>
+        <option value="Volkswagen">Volkswagen </option>
+        <option value="Range Rover">Range Rover</option>
+    </select>
+</div> -->
+
+<!-- <div class="cars-container" id="carsContainer"> -->
+</div>
+
+
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>First District</p>
+            <p>Giza 6 October</p>
+            <p>Phone: +201223783992</p>
+            <p>Email: car@gamil.com</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Legal</h3>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Connect With Us</h3>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <h3>Newsletter</h3>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </div>
+</footer>
+<div class="bottom-bar">
+    <p>Developed by <strong>Mahmoud Zain</strong> © 2025</p>
+</div>
+
+<script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+<script>
+    document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = this.querySelector('input[type="email"]').value;
+        alert(`Thank you for subscribing with email: ${email}`);
+        this.reset();
+    });
+</script>
+</body>
+</html>

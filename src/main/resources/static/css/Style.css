@@ -1,0 +1,80 @@
+.bi-car-front{
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
+}
+section {
+    overflow-y: auto;
+    height: calc(100vh - 56px); 
+    padding: 20px;
+}
+main {
+    min-height: 100vh;
+    overflow: hidden;
+}
+[data-bs-theme="dark"] .navbar {
+    background-color: var(--bs-dark);
+    color: var(--bs-light);
+}
+
+[data-bs-theme="dark"] .navbar-brand {
+    color: var(--bs-light);
+}
+
+[data-bs-theme="dark"] .bi-bell {
+    color: var(--bs-light);
+}
+
+[data-bs-theme="dark"] .form-control {
+    background-color: var(--bs-dark);
+    border-color: var(--bs-secondary);
+    color: var(--bs-light);
+}
+
+[data-bs-theme="dark"] .form-control::placeholder {
+    color: var(--bs-secondary);
+}
+
+[data-bs-theme="light"] .navbar {
+    background-color: var(--bs-white);
+}
+        .stats-card {
+            transition: transform 0.3s;
+        }
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .sidebar-icon {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+        .flex-grow-1 {
+    height: 100vh;
+    overflow-y: auto;
+}
+
+
+.form-control, .form-select {
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    padding: 10px;
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border-radius: 8px;
+    padding: 10px 25px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+
+.form-title {
+    color: #0d6efd;
+    font-weight: 600;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #0d6efd;
+    padding-bottom: 10px;
+}

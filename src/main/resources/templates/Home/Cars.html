@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Cars</title>
+    <link rel="stylesheet" th:href="@{/home/Cars.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Available Cars</h1>
+
+    <div class="car-grid">
+        <div class="car-card" th:each="car : ${cars}">
+            <img th:if="${car.image != null}" th:src="@{'/image/' + ${car.id}}"
+                 th:alt="${car.brand + ' ' + car.model}" class="car-image">
+            <img th:unless="${car.image != null}" src="https://via.placeholder.com/300"
+                 alt="Placeholder Image" class="car-image">
+
+            <div class="car-details">
+                <span class="car-status"
+                      th:classappend="${car.status == T(com.test.validation.Entity.Enums.CarStatus).AVAILABLE ? 'status-available' : 'status-rented'}"
+                      th:text="${car.status}">Status</span>
+
+                <h2 class="car-name" th:text="${car.brand + ' ' + car.model + ' ' + car.year}">Car Name</h2>
+
+                <div class="car-price">
+                    <span th:text="${'$' + #numbers.formatDecimal(car.pricePerDay, 0, 2)}">$299</span>
+                    <span>/day</span>
+                </div>
+
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">Type:</span>
+                        <span th:text="${car.carType}">Sedan</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Color:</span>
+                        <span th:text="${car.color}">Black</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Transmission:</span>
+                        <span th:text="${car.transmission}">Automatic</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Mileage:</span>
+                        <span th:text="${#numbers.formatDecimal(car.mileage, 0, 0) + ' km'}">50000 km</span>
+                    </div>
+                </div>
+
+                <div class="car-description" th:if="${car.description != null}">
+                    <p th:text="${car.description}">Car description here...</p>
+                </div>
+
+                <button class="book-button"
+                        th:data-id="${car.id}"
+                        th:disabled="${car.status != T(com.test.validation.Entity.Enums.CarStatus).AVAILABLE}">
+                    Book Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${#lists.isEmpty(cars)}" class="no-cars-message">
+        <p>No cars available at the moment.</p>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        const bookButtons = document.querySelectorAll('.book-button');
+        bookButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const carId = this.getAttribute('data-id');
+                if (carId) {
+                    window.location.href = '/book/' + carId;
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
