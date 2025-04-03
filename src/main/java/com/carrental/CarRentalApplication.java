@@ -16,10 +16,9 @@ import java.util.Enumeration;
 public class CarRentalApplication  {
 
 	public static void main(String[] args) {
-		ApplicationContext context =  SpringApplication.run(CarRentalApplication.class, args);
-//	     String [] beanNames = context.getBeanDefinitionNames();
-//		Arrays.sort(beanNames);
-//
+		var context =  SpringApplication.run(CarRentalApplication.class, args);
+	     String [] beanNames = context.getBeanDefinitionNames();
+
 //		for (String beanName : beanNames) {
 //			System.out.println("beanName = " + beanName);
 //		}

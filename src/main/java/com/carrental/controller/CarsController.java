@@ -1,14 +1,13 @@
 package com.carrental.controller;
 
 import com.carrental.dto.CarDTO;
-import com.carrental.repository.CarsRepository;
+import com.carrental.dto.mappers.CarMapper;
 import com.carrental.entity.Cars;
 import com.carrental.entity.enums.CarStatus;
 import com.carrental.service.CarsService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,33 +19,34 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
+@RequestMapping("/cars")
 public class CarsController {
     private final CarsService carsService;
-    private final CarsRepository carsRepository;
+    private final CarMapper carMapper;
     private final Logger logger = LoggerFactory.getLogger(CarsController.class);
 
-    public CarsController(CarsService carsService, CarsRepository carsRepository) {
+    public CarsController(CarsService carsService, CarMapper carMapper) {
         this.carsService = carsService;
-        this.carsRepository = carsRepository;
+        this.carMapper = carMapper;
     }
 
-    @GetMapping("/AddCars")
+    @GetMapping("/add")
     public String showAddCarForm(Model model) {
-        if (!model.containsAttribute("cars")) {
-            model.addAttribute("cars", new Cars());
+        if (!model.containsAttribute("carDTO")) {
+            model.addAttribute("carDTO", new CarDTO());
         }
         return "AddCars";
     }
 
-    @PostMapping("/CarsAdd")
-    public String saveCars(
-            @Valid @ModelAttribute("cars") Cars car,
+    @PostMapping("/add")
+    public String saveCar(
+            @Valid @ModelAttribute("carDTO") CarDTO carDTO,
             BindingResult bindingResult,
             @RequestParam("imageFile") MultipartFile imageFile,
             RedirectAttributes redirectAttributes) {
 
         try {
-            logger.info("Attempting to save car: {} {} {}", car.getBrand(), car.getModel(), car.getYear());
+            logger.info("Attempting to save car: {} {} {}", carDTO.getBrand(), carDTO.getModel(), carDTO.getYear());
 
             if (bindingResult.hasErrors()) {
                 logger.error("Validation errors found: {}", bindingResult.getAllErrors());
@@ -55,69 +55,44 @@ public class CarsController {
 
             if (imageFile != null && !imageFile.isEmpty()) {
                 logger.info("Image file received, size: {} bytes", imageFile.getSize());
-                car.setImage(imageFile.getBytes());
+                Cars carEntity = carMapper.toEntity(carDTO);
+                carEntity.setImage(imageFile.getBytes());
+                carDTO = carMapper.toDTO(carEntity);
             }
 
-            if (car.getStatus() == null) {
-                car.setStatus(CarStatus.AVAILABLE);
+            if (carDTO.getStatus() == null) {
+                carDTO.setStatus(CarStatus.AVAILABLE);
             }
 
-            Cars savedCar = carsService.addCar(car);
-            logger.info("Car saved successfully with ID: {}", savedCar.getId());
+            CarDTO savedCarDTO = carsService.addCar(carDTO);
+            logger.info("Car saved successfully with ID: {}", savedCarDTO.getId());
 
             redirectAttributes.addFlashAttribute("success", "Car added successfully");
-            return "redirect:/Cars";
+            return "redirect:/cars";
 
         } catch (IOException e) {
             logger.error("Error processing image file: {}", e.getMessage());
             redirectAttributes.addFlashAttribute("error", "Error processing image file");
-            return "redirect:/AddCars";
+            return "redirect:/cars/add";
         } catch (Exception e) {
             logger.error("Error saving car: {}", e.getMessage());
             redirectAttributes.addFlashAttribute("error", "Error saving car: " + e.getMessage());
-            return "redirect:/AddCars";
+            return "redirect:/cars/add";
         }
     }
 
-
-
-    @GetMapping("/cars")
+    @GetMapping
     public String listCars(Model model) {
-        List<Cars> carsList = carsService.getAllCars();
+        List<CarDTO> carsList = carsService.getAllCars();
         logger.info("Retrieved Cars List: {}", carsList);
         model.addAttribute("cars", carsList);
         return "Cars";
     }
 
-
-
     @GetMapping("/{id}")
-    public ResponseEntity<CarDTO> getCar(@PathVariable Long id) {
-        Cars car = carsService.findById(id);
-        if (car != null) {
-            CarDTO carDTO = CarDTO.builder()
-                    .id(car.getId())
-                    .brand(car.getBrand())
-                    .model(car.getModel())
-                    .year(car.getYear())
-                    .color(car.getColor())
-                    .carType(car.getCarType())
-                    .transmission(car.getTransmission())
-                    .mileage(car.getMileage())
-                    .status(car.getStatus())
-                    .pricePerDay(car.getPricePerDay())
-                    .description(car.getDescription())
-                    .build();
-
-            return ResponseEntity.ok(carDTO);
-        }
-
-        return ResponseEntity.notFound().build();
+    public String getCar(@PathVariable Long id, Model model) {
+        CarDTO carDTO = carsService.findById(id);
+        model.addAttribute("car", carDTO);
+        return "CarDetails";
     }
-
-
-
-
 }
-
-

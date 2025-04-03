@@ -50,7 +50,7 @@ public class PdfService {
 
             List<PersonalInformation> users = userService.getAllUsers();
             if (users == null || users.isEmpty()) {
-                document.add(new Paragraph("⚠️ No users found!").setTextAlignment(TextAlignment.CENTER).setBold());
+                document.add(new Paragraph("No users found").setTextAlignment(TextAlignment.CENTER).setBold());
             } else {
                 Table table = new Table(new float[]{1, 2, 2, 3, 2, 2})
                         .setWidth(UnitValue.createPercentValue(100))
@@ -95,9 +95,7 @@ public class PdfService {
         byte[] pdfBytes = generatePdf();
         try (FileOutputStream fos = new FileOutputStream("users-report.pdf")) {
             fos.write(pdfBytes);
-            System.out.println("✅ PDF saved successfully as 'users-report.pdf'");
         } catch (IOException e) {
-            System.err.println("❌ Error saving PDF: " + e.getMessage());
             e.printStackTrace();
         }
     }

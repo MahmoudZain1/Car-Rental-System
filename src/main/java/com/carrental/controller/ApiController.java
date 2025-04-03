@@ -1,5 +1,6 @@
 package com.carrental.controller;
 
+import com.carrental.dto.UsersDTO;
 import com.carrental.entity.PersonalInformation;
 import com.carrental.entity.Users;
 import com.carrental.service.PdfService;
@@ -137,7 +138,7 @@ public class ApiController {
     }
 
     @PostMapping("/Register")
-    public String registerUser(@ModelAttribute("user") @Valid Users users, Model model) {
+    public String registerUser(@ModelAttribute("user") @Valid UsersDTO users, Model model) {
         try {
             userProService.saveUser(users);
             httpSession.setAttribute("email" ,users.getEmail());

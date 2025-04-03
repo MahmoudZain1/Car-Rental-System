@@ -1,5 +1,7 @@
 package com.carrental.service;
 
+import com.carrental.dto.UsersDTO;
+import com.carrental.dto.mappers.UsersMapper;
 import com.carrental.entity.Users;
 import com.carrental.repository.UserProfileRepository;
 import com.carrental.repository.UserRoleRepository;
@@ -19,29 +21,30 @@ public class UserProfileService {
     private final PasswordEncoder passwordEncoder;
     private final MailSenderService senderMail;
     private final UserRoleRepository userRole;
+    private final UsersMapper usersMapper;
+    private static final String OWNER_EMAIL = "zainmahmoud619@gmail.com";
 
-    public UserProfileService(UserProfileRepository userProfiles, PasswordEncoder passwordEncoder, MailSenderService senderMail, UserRoleRepository userRole) {
+    public UserProfileService(UserProfileRepository userProfiles, PasswordEncoder passwordEncoder, MailSenderService senderMail, UserRoleRepository userRole, UsersMapper usersMapper) {
         this.userProfiles = userProfiles;
         this.passwordEncoder = passwordEncoder;
         this.senderMail = senderMail;
         this.userRole = userRole;
+        this.usersMapper = usersMapper;
     }
 
     @Transactional
-    public void saveUser(Users user) {
-        if (userProfiles.findByEmail(user.getEmail()).isPresent()) {
+    public void saveUser(UsersDTO usersDTO) {
+        if (userProfiles.findByEmail(usersDTO.getEmail()).isPresent()) {
             throw new IllegalStateException("Email already exists!");
         }
 
-        Users newUser = new Users();
-        newUser.setFirstName(user.getFirstName());
-        newUser.setLastName(user.getLastName());
-        newUser.setEmail(user.getEmail());
-        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        Users newUser = usersMapper.toEntity(usersDTO);
+
+        newUser.setPassword(passwordEncoder.encode(usersDTO.getPassword()));
         newUser.setCreatedAt(LocalDateTime.now());
         newUser.setIs_verifiy(false);
 
-        Role role = user.getEmail().equals("zainmahmoud619@gmail.com") ?
+        Role role = usersDTO.getEmail().equals(OWNER_EMAIL) ?
                 userRole.findByName(UserRole.OWNER)
                         .orElseThrow(() -> new RuntimeException("Role OWNER not found in database")) :
                 userRole.findByName(UserRole.USER)
@@ -53,7 +56,7 @@ public class UserProfileService {
         newUser.setVerifiyCode(code);
         userProfiles.save(newUser);
 
-        senderMail.sendEmail(user.getEmail(), "Verification Code:", code);
+        senderMail.sendEmail(usersDTO.getEmail(), "Verification Code:", code);
     }
 
     @Transactional
