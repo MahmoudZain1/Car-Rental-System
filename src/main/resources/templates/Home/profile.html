@@ -1,68 +1,115 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link th:href="@{/home/profi.css}" rel="stylesheet">
     <title>User Profile</title>
+    <link rel="stylesheet" href="/home/profi.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 </head>
 <body>
 <div class="profile-container">
-    <div class="profile-header">
-        <div class="profile-picture">
-            <img src="" alt="Profile Picture">
+    <div class="card">
+        <div class="profile-header">
+            <button class="btn btn-outline-light btn-sm logout-btn">
+                <i class="fas fa-sign-out-alt me-2" href="/logout"></i>Logout
+            </button>
+
+            <div class="text-center">
+                <div class="profile-picture-container">
+                    <img src="/api/placeholder/120/120" alt="Profile Picture" class="profile-picture" id="profilePic">
+                    <div class="upload-icon" id="uploadBtn">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                </div>
+                <h3 class="mb-4" th:text="${user.firstName} + ' ' + ${user.lastName}">Your Profile</h3>
+            </div>
+
+            <div id="viewProfileMode">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="info-card d-flex align-items-center">
+                            <div class="info-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">First Name</div>
+                                <div class="info-value" id="firstName" th:text="${user.firstName}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="info-card d-flex align-items-center">
+                            <div class="info-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Last Name</div>
+                                <div class="info-value" id="lastName" th:text="${user.lastName}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="info-card d-flex align-items-center">
+                            <div class="info-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="info-content">
+                                <div class="info-label">Email</div>
+                                <div class="info-value" id="email" th:text="${user.email}">@example.com</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            <div id="editProfileMode" style="display: none;">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="info-card d-flex align-items-center">
+                            <div class="info-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="info-content w-100">
+                                <div class="info-label">First Name</div>
+                                <input type="text" class="form-control" id="firstNameInput" value="John">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="info-card d-flex align-items-center">
+                            <div class="info-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="info-content w-100">
+                                <div class="info-label">Last Name</div>
+                                <input type="text" class="form-control" id="lastNameInput" value="Doe">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="info-card d-flex align-items-center">
+                            <div class="info-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="info-content w-100">
+                                <div class="info-label">Email</div>
+                                <input type="email" class="form-control" id="emailInput" value="john.doe@example.com" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        <h1>John Doe</h1>
     </div>
 
-    <div class="profile-info">
-        <div class="info-group">
-            <div class="info-label">First Name</div>
-            <div class="info-value">John</div>
-        </div>
-        <div class="info-group">
-            <div class="info-label">Last Name</div>
-            <div class="info-value">Doe</div>
-        </div>
-        <div class="info-group">
-            <div class="info-label">Email</div>
-            <div class="info-value">john.doe@example.com</div>
-        </div>
-        <div class="info-group">
-            <div class="info-label">Phone</div>
-            <div class="info-value">+1 234 567 8900</div>
-        </div>
-        <div class="info-group">
-            <div class="info-label">Date of Birth</div>
-            <div class="info-value">15 March 1985</div>
-        </div>
-        <div class="info-group">
-            <div class="info-label">Gender</div>
-            <div class="info-value">Male</div>
-        </div>
-        <div class="info-group">
-            <div class="info-label">Country</div>
-            <div class="info-value">United States</div>
-        </div>
-        <div class="info-group">
-            <div class="info-label">City</div>
-            <div class="info-value">New York</div>
-        </div>
-        <div class="info-group">
-            <div class="info-label">Postal Code</div>
-            <div class="info-value">10001</div>
-        </div>
-        <div class="info-group">
-            <div class="info-label">Member Since</div>
-            <div class="info-value">January 2024</div>
-        </div>
-    </div>
-
-    <div class="profile-actions">
-        <button class="action-button edit-profile">Edit Profile</button>
-        <button class="action-button view-bookings">View Bookings</button>
-    </div>
 </div>
+
+
+
 </body>
 </html>

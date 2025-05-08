@@ -77,12 +77,12 @@
                     Dashboard
                 </a>
             </li>
-            <li>
-                <a href="/Analytics" class="nav-link text-white">
-                    <i class="bi bi-speedometer2 sidebar-icon"></i>
-                    Analytics
-                </a>
-            </li>
+<!--            <li>-->
+<!--                <a href="/Analytics" class="nav-link text-white">-->
+<!--                    <i class="bi bi-speedometer2 sidebar-icon"></i>-->
+<!--                    Analytics-->
+<!--                </a>-->
+<!--            </li>-->
             <li>
                 <a href="/Rentals" class="nav-link text-white">
                     <i class="bi bi-calendar3 sidebar-icon"></i>
@@ -90,13 +90,13 @@
                 </a>
             </li>
             <li>
-                <a href="AddCars" class="nav-link text-white">
+                <a href="/AddCars" class="nav-link text-white">
                     <i class="bi bi-car-front sidebar-icon"></i>
                     Cars
                 </a>
             </li>
             <li>
-                <a href="/AddUsers" class="nav-link text-white">
+                <a href="/AddUser" class="nav-link text-white">
                     <i class="bi bi-people sidebar-icon"></i>
                     Customers
                 </a>
@@ -162,8 +162,8 @@
             <div class="col-md-3">
                 <div class="card bg-warning text-white stats-card">
                     <div class="card-body">
-                        <h5 class="card-title">Available Cars</h5>
-                        <h2 class="card-text">0</h2>
+                        <h5 class="card-title" >Available Cars</h5>
+                        <h2 class="card-text" th:text="${totalCars}" >0</h2>
                         <i class="bi bi-check-circle float-end fs-1 opacity-50"></i>
                     </div>
                 </div>

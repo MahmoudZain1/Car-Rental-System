@@ -77,12 +77,12 @@
                     Dashboard
                 </a>
             </li>
-            <li>
-                <a href="/Analytics" class="nav-link text-white">
-                    <i class="bi bi-speedometer2 sidebar-icon"></i>
-                    Analytics
-                </a>
-            </li>
+<!--            <li>-->
+<!--                <a href="/Analytics" class="nav-link text-white">-->
+<!--                    <i class="bi bi-speedometer2 sidebar-icon"></i>-->
+<!--                    Analytics-->
+<!--                </a>-->
+<!--            </li>-->
             <li>
                 <a href="Rentals" class="nav-link text-white">
                     <i class="bi bi-calendar3 sidebar-icon"></i>
@@ -152,7 +152,7 @@
                     <span th:text="${errorMessage}"></span>
                 </div>
                 <form class="row g-4" th:action="@{/AddUser}"
-                                       method="post" th:object="${User}" novalidate>
+                                       method="POST" th:object="${Users}" novalidate>
                     <div class="col-md-6">
                         <label for="inputfristName" class="form-label">First Name</label>
                         <input type="text" class="form-control" id="inputfristName" placeholder="Mahmoud" th:field="*{firstName}" required>
@@ -210,13 +210,14 @@
                         <input type="text" class="form-control" id="inputZip" th:field="*{postal}" required>
                         <div th:if="${#fields.hasErrors('postal')}" th:errors="*{postal}" class="text-danger"></div>
                     </div>
-                   <a th:href="@{/Users}">
-                       <div class="col-12 text-center mt-4">
-                           <button type="submit" class="btn btn-primary px-5">
-                               Add Customer
-                           </button>
-                       </div>
-                   </a>
+
+                    <div class="col-12 text-center mt-4">
+                        <button type="submit" class="btn btn-primary px-5">
+                            Add Customer
+                        </button>
+                    </div>
+
+
 
                 </form>
             </div>

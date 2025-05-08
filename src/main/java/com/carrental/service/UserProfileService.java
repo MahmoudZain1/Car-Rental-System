@@ -8,6 +8,8 @@ import com.carrental.repository.UserRoleRepository;
 import com.carrental.entity.Role;
 import com.carrental.entity.enums.UserRole;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,19 +19,25 @@ import java.util.Optional;
 
 @Service
 public class UserProfileService {
+
     private final UserProfileRepository userProfiles;
     private final PasswordEncoder passwordEncoder;
     private final MailSenderService senderMail;
     private final UserRoleRepository userRole;
     private final UsersMapper usersMapper;
     private static final String OWNER_EMAIL = "zainmahmoud619@gmail.com";
+    private final LoginService loginService;
 
-    public UserProfileService(UserProfileRepository userProfiles, PasswordEncoder passwordEncoder, MailSenderService senderMail, UserRoleRepository userRole, UsersMapper usersMapper) {
+
+    public UserProfileService(UserProfileRepository userProfiles, PasswordEncoder passwordEncoder,
+                              MailSenderService senderMail, UserRoleRepository userRole,
+                              UsersMapper usersMapper, LoginService loginService) {
         this.userProfiles = userProfiles;
         this.passwordEncoder = passwordEncoder;
         this.senderMail = senderMail;
         this.userRole = userRole;
         this.usersMapper = usersMapper;
+        this.loginService = loginService;
     }
 
     @Transactional
@@ -39,7 +47,6 @@ public class UserProfileService {
         }
 
         Users newUser = usersMapper.toEntity(usersDTO);
-
         newUser.setPassword(passwordEncoder.encode(usersDTO.getPassword()));
         newUser.setCreatedAt(LocalDateTime.now());
         newUser.setIs_verifiy(false);
@@ -74,21 +81,14 @@ public class UserProfileService {
     }
 
     public boolean verifyLogin(String email, String password, HttpSession session) {
-        Optional<Users> optionalUser = userProfiles.findByEmail(email);
-
-        if (optionalUser.isPresent()) {
-            Users user = optionalUser.get();
-
-            if (!user.getIs_verifiy()) {
-                throw new IllegalStateException("Account not verified! Please check your email.");
-            }
-
-            if (passwordEncoder.matches(password, user.getPassword())) {
-
-                session.setAttribute("loggedInUser", user);
-                return true;
-            }
-        }
-        return false;
+        return loginService.verifyLogin(email, password, session);
     }
+
+   public UsersDTO GetCurrentUsr(){
+        String Email  =  SecurityContextHolder.getContext().getAuthentication().getName();
+        Users user = userProfiles.findByEmail(Email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not Found"));
+
+        return usersMapper.toDTO(user);
+   }
 }

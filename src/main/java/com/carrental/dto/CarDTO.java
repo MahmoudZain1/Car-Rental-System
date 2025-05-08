@@ -22,4 +22,5 @@ public @Data  class CarDTO {
     private int mileage;
     private CarStatus status;
     private String description;
+    private String imagePath;
 }

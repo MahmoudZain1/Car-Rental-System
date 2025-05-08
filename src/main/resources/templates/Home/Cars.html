@@ -12,14 +12,20 @@
 
     <div class="car-grid">
         <div class="car-card" th:each="car : ${cars}">
-            <img th:if="${car.image != null}" th:src="@{'/image/' + ${car.id}}"
-                 th:alt="${car.brand + ' ' + car.model}" class="car-image">
-            <img th:unless="${car.image != null}" src="https://via.placeholder.com/300"
+            <img th:if="${car.imagePath != null}"
+                 th:src="@{'/image/' + ${car.id}}"
+                 alt="Car Image" class="car-image">
+
+            <img th:unless="${car.imagePath != null}" src="https://via.placeholder.com/300"
                  alt="Placeholder Image" class="car-image">
+
+                <p th:text="'Image Path: ' + ${car.imagePath} ?: 'No image path'"></p>
+
+
 
             <div class="car-details">
                 <span class="car-status"
-                      th:classappend="${car.status == T(com.test.validation.Entity.Enums.CarStatus).AVAILABLE ? 'status-available' : 'status-rented'}"
+                      th:classappend="${car.status.name() == 'AVAILABLE' ? 'status-available' : 'status-rented'}"
                       th:text="${car.status}">Status</span>
 
                 <h2 class="car-name" th:text="${car.brand + ' ' + car.model + ' ' + car.year}">Car Name</h2>
@@ -51,10 +57,7 @@
                 <div class="car-description" th:if="${car.description != null}">
                     <p th:text="${car.description}">Car description here...</p>
                 </div>
-
-                <button class="book-button"
-                        th:data-id="${car.id}"
-                        th:disabled="${car.status != T(com.test.validation.Entity.Enums.CarStatus).AVAILABLE}">
+                <button class="book-button">
                     Book Now
                 </button>
             </div>

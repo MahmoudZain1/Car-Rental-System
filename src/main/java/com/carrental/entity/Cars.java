@@ -62,9 +62,8 @@ public @Data  class Cars {
     @Column(nullable = false)
     private CarStatus status = CarStatus.AVAILABLE;
 
-    @Column(name = "image", columnDefinition = "BYTEA")
-    @Lob
-    private byte[] image;
+    @Column(name = "image_path")
+    private String imagePath;
 
 
     @Column(columnDefinition = "TEXT")

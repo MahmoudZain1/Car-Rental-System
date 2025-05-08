@@ -3,11 +3,16 @@ package com.carrental.controller;
 import com.carrental.dto.UsersDTO;
 import com.carrental.entity.PersonalInformation;
 import com.carrental.entity.Users;
+import com.carrental.service.CarsService;
 import com.carrental.service.PdfService;
 import com.carrental.service.UserProfileService;
 import com.carrental.service.UserServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import org.slf4j.ILoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.Page;
@@ -22,16 +27,16 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
+
 @Controller
+@AllArgsConstructor
 public class ApiController {
-    @Autowired
-    private UserServiceImpl userServiceImpl;
-    @Autowired
-    private PdfService pdfService;
-    @Autowired
-    private UserProfileService userProService;
-    @Autowired
-    private HttpSession httpSession;
+
+    private final UserServiceImpl userServiceImpl;
+    private final PdfService pdfService;
+    private final UserProfileService userProService;
+    private final HttpSession httpSession;
+    private final CarsService carsService;
 
 
 
@@ -42,7 +47,7 @@ public class ApiController {
         webDataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
 
-    @GetMapping("/EditUser")
+    @GetMapping("/EditUser/{id}")
     public String editUser(@PathVariable("id") Long id, Model model) {
         Optional<PersonalInformation> user = userServiceImpl.GetById(id);
         model.addAttribute("userid", user.orElse(null));
@@ -68,7 +73,7 @@ public class ApiController {
         }
     }
 
-    @GetMapping("/AddUsers")
+    @GetMapping("/AddUser")
     public String addUser(Model model) {
         model.addAttribute("Users", new PersonalInformation());
         return "AddUser";
@@ -124,7 +129,7 @@ public class ApiController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", userPage.getTotalPages());
         model.addAttribute("totalUser", userPage.getTotalElements());
-
+        model.addAttribute("totalCars" , carsService.sizeCar());
         model.addAttribute("searchName", searchName);
 
         return "DashBord";
@@ -192,9 +197,10 @@ public class ApiController {
             }
         } catch (IllegalStateException e) {
             model.addAttribute("error", e.getMessage());
-            return "redirect:/Login";
+            return "Profiles/login";
         }
     }
+
 
 
 
